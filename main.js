@@ -210,12 +210,15 @@
         }
 
         function submitReport() {
+            console.log ("Submit button clicked");
+        alert("Submit function triggered"); // actual logic
+
             const weekEnding = document.getElementById('reportWeek').value;
-            const achievements = document.getElementById('acheivements').value;
+            const achievement = document.getElementById('achievements').value;
             const pendingtask = document.getElementById('pendingtask').value;
             const suggestions = document.getElementById('suggestions').value;
 
-            if (!weekEnding || !activity || !pendingtask || !suggestions) {
+            if (!weekEnding || !achievements || !pendingtask || !suggestions) {
                 showMessage('submitMessage', 'Please fill in all fields', 'error');
                 return;
             }
@@ -224,7 +227,7 @@
                 id: reports.length + 1,
                 staff: currentUser.username,
                 weekEnding: weekEnding,
-                activity: activity,
+                achievements: achievements,
                 pendingtask: pendingtask,
                 suggestions: suggestions,
                 status: 'pending',
@@ -236,7 +239,7 @@
             showMessage('submitMessage', 'Report submitted successfully!', 'success');
             
             // Clear form
-            document.getElementById('activity').value = '';
+            document.getElementById('achievements').value = '';
             document.getElementById('pendingtask').value = '';
             document.getElementById('suggestions').value = '';
         }
@@ -260,8 +263,8 @@
                         <span class="status-badge status-${report.status}">${report.status}</span>
                     </div>
                     <div><strong>Achievements:</strong> ${report.achievements}</div>
-                    <div><strong>Challenges:</strong> ${report.pendingtask}</div>
-                    <div><strong>Next Week Plans:</strong> ${report.suggestion}</div>
+                    <div><strong>Pending Task:</strong> ${report.pendingtask}</div>
+                    <div><strong>Suggestions:</strong> ${report.suggestion}</div>
                 </div>
             `).join('');
         }

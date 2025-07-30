@@ -23,8 +23,8 @@
                 staff: 'john',
                 weekEnding: '2024-07-26',
                 achievements: 'Completed project phase 1, improved team collaboration',
-                challenges: 'Database integration took longer than expected',
-                nextWeekPlans: 'Start phase 2, conduct user testing',
+                pendingtask: 'Database integration took longer than expected',
+                suggestions: 'Start phase 2, conduct user testing',
                 status: 'approved',
                 submittedDate: '2024-07-27'
             },
@@ -33,8 +33,8 @@
                 staff: 'jane',
                 weekEnding: '2024-07-26',
                 achievements: 'Redesigned UI components, fixed critical bugs',
-                challenges: 'Limited time for thorough testing',
-                nextWeekPlans: 'Implement new features, code review',
+                pendingtask: 'Limited time for thorough testing',
+                suggestions: 'Implement new features, code review',
                 status: 'pending',
                 submittedDate: '2024-07-27'
             }
@@ -156,7 +156,7 @@
                 if (currentUser.role === 'staff') {
                     document.getElementById('staffDashboard').style.display = 'block';
                     document.getElementById('hodDashboard').style.display = 'none';
-                    loadEmployeeReports();
+                    loadStaffReports();
                 } else {
                     document.getElementById('staffDashboard').style.display = 'none';
                     document.getElementById('hodDashboard').style.display = 'block';
@@ -201,7 +201,7 @@
 
             // Load data based on tab
             if (tabName === 'myreports') {
-                loadEmployeeReports();
+                loadStaffReports();
             } else if (tabName === 'pending') {
                 loadPendingReports();
             } else if (tabName === 'allreports') {
@@ -213,9 +213,9 @@
             const weekEnding = document.getElementById('reportWeek').value;
             const activity = document.getElementById('activity').value;
             const pendingtask = document.getElementById('pendingtask').value;
-            const recommendation = document.getElementById('recommendation').value;
+            const suggestions = document.getElementById('recommendation').value;
 
-            if (!weekEnding || !activity || !pendingtask || !recommendation) {
+            if (!weekEnding || !activity || !pendingtask || !suggestions) {
                 showMessage('submitMessage', 'Please fill in all fields', 'error');
                 return;
             }
@@ -226,7 +226,7 @@
                 weekEnding: weekEnding,
                 activity: activity,
                 pendingtask: pendingtask,
-                recommendation: recommendation,
+                suggestions: suggestions,
                 status: 'pending',
                 submittedDate: new Date().toISOString().split('T')[0]
             };
@@ -238,19 +238,19 @@
             // Clear form
             document.getElementById('activity').value = '';
             document.getElementById('pendingtask').value = '';
-            document.getElementById('recommendation').value = '';
+            document.getElementById('suggestions').value = '';
         }
 
         function loadStaffReports() {
             const staffReports = reports.filter(report => report.staff === currentUser.username);
             const container = document.getElementById('staffReports');
             
-            if (employeeReports.length === 0) {
+            if (staffReports.length === 0) {
                 container.innerHTML = '<div class="empty-state"><h3>No reports found</h3><p>You haven\'t submitted any reports yet.</p></div>';
                 return;
             }
 
-            container.innerHTML = employeeReports.map(report => `
+            container.innerHTML = staffReports.map(report => `
                 <div class="report-card">
                     <div class="report-header">
                         <div>
@@ -260,8 +260,8 @@
                         <span class="status-badge status-${report.status}">${report.status}</span>
                     </div>
                     <div><strong>Achievements:</strong> ${report.achievements}</div>
-                    <div><strong>Challenges:</strong> ${report.challenges}</div>
-                    <div><strong>Next Week Plans:</strong> ${report.nextWeekPlans}</div>
+                    <div><strong>Challenges:</strong> ${report.pendingtask}</div>
+                    <div><strong>Next Week Plans:</strong> ${report.suggestion}</div>
                 </div>
             `).join('');
         }
@@ -279,14 +279,14 @@
                 <div class="report-card">
                     <div class="report-header">
                         <div>
-                            <div class="report-title">Employee: ${users[report.employee]?.name || report.employee}</div>
-                            <div class="report-date">Week Ending: ${formatDate(report.weekEnding)} | Submitted: ${formatDate(report.submittedDate)} | Dept: ${users[report.employee]?.department || 'N/A'}</div>
+                            <div class="report-title">staff: ${users[report.staff]?.name || report.staff}</div>
+                            <div class="report-date">Week Ending: ${formatDate(report.weekEnding)} | Submitted: ${formatDate(report.submittedDate)} | Dept: ${users[report.staff]?.department || 'N/A'}</div>
                         </div>
                         <span class="status-badge status-${report.status}">${report.status}</span>
                     </div>
                     <div><strong>Achievements:</strong> ${report.achievements}</div>
-                    <div><strong>Challenges:</strong> ${report.challenges}</div>
-                    <div><strong>Next Week Plans:</strong> ${report.nextWeekPlans}</div>
+                    <div><strong>Pending Task:</strong> ${report.pendingtask}</div>
+                    <div><strong>Suggestion:</strong> ${report.suggestions}</div>
                     <div style="margin-top: 15px;">
                         <button class="btn" onclick="reviewReport(${report.id}, 'approved')">Approve</button>
                         <button class="btn btn-secondary" onclick="reviewReport(${report.id}, 'rejected')">Reject</button>
@@ -307,14 +307,14 @@
                 <div class="report-card">
                     <div class="report-header">
                         <div>
-                            <div class="report-title">Employee: ${users[report.employee]?.name || report.employee}</div>
-                            <div class="report-date">Week Ending: ${formatDate(report.weekEnding)} | Submitted: ${formatDate(report.submittedDate)} | Dept: ${users[report.employee]?.department || 'N/A'}</div>
+                            <div class="report-title">Staff: ${users[report.staff]?.name || report.staff}</div>
+                            <div class="report-date">Week Ending: ${formatDate(report.weekEnding)} | Submitted: ${formatDate(report.submittedDate)} | Dept: ${users[report.staff]?.department || 'N/A'}</div>
                         </div>
                         <span class="status-badge status-${report.status}">${report.status}</span>
                     </div>
                     <div><strong>Achievements:</strong> ${report.achievements}</div>
-                    <div><strong>Challenges:</strong> ${report.challenges}</div>
-                    <div><strong>Next Week Plans:</strong> ${report.nextWeekPlans}</div>
+                    <div><strong>Pending Task:</strong> ${report.pendingtask}</div>
+                    <div><strong>Suggestions:</strong> ${report.suggestions}</div>
                 </div>
             `).join('');
         }

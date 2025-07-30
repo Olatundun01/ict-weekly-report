@@ -211,9 +211,9 @@
 
         function submitReport() {
             const weekEnding = document.getElementById('reportWeek').value;
-            const activity = document.getElementById('activity').value;
+            const achievements = document.getElementById('acheivements').value;
             const pendingtask = document.getElementById('pendingtask').value;
-            const suggestions = document.getElementById('recommendation').value;
+            const suggestions = document.getElementById('suggestions').value;
 
             if (!weekEnding || !activity || !pendingtask || !suggestions) {
                 showMessage('submitMessage', 'Please fill in all fields', 'error');

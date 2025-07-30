@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Report System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Weekly Report System</h1>
+            <div class="user-info" id="userInfo">
+                <span class="user-badge" id="userBadge"></span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Login Form -->
+            <div class="login-form active" id="loginForm">
+                <div id="loginMessage"></div>
+                <div class="form-group">
+                    <label for="loginUsername">Username</label>
+                    <input type="text" id="loginUsername" placeholder="Enter your username">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password">
+                </div>
+                <button class="btn" onclick="login()">Login</button>
+                <div style="text-align: center; margin-top: 20px;">
+                    <p>Don't have an account? <a href="#" onclick="showRegister()" style="color: #667eea; text-decoration: none; font-weight: 600;">Register here</a></p>
+                </div>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="register-form" id="registerForm">
+                <div id="registerMessage"></div>
+                <div class="form-group">
+                    <label for="regFullName">Full Name</label>
+                    <input type="text" id="regFullName" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="regUsername">Username</label>
+                    <input type="text" id="regUsername" placeholder="Choose a username">
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" placeholder="Enter your email address">
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" placeholder="Choose a password (min 6 characters)">
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">Confirm Password</label>
+                    <input type="password" id="regConfirmPassword" placeholder="Confirm your password">
+                </div>
+                <div class="form-group">
+                    <label for="regRole">Role</label>
+                    <select id="regRole">
+                        <option value="staff">Staff</option>
+                        <option value="hod">HOD</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="regDepartment">Department</label>
+                    <select id="regDepartment">
+                        <option value="ICT">ICT</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="register()">Register</button>
+                <div style="text-align: center; margin-top: 20px;">
+                    <p>Already have an account? <a href="#" onclick="showLogin()" style="color: #667eea; text-decoration: none; font-weight: 600;">Login here</a></p>
+                </div>
+            </div>
+
+            <!-- Dashboard -->
+            <div class="dashboard" id="dashboard">
+                <!-- Employee Dashboard -->
+                <div id="employeeDashboard">
+                    <div class="tabs">
+                        <button class="tab active" onclick="switchTab('submit')">Submit Report</button>
+                        <button class="tab" onclick="switchTab('myreports')">My Reports</button>
+                    </div>
+
+                    <!-- Submit Report Tab -->
+                    <div class="tab-content active" id="submit">
+                        <div id="submitMessage"></div>
+                        <div class="form-group">
+                            <label for="reportWeek">Week Ending</label>
+                            <input type="date" id="reportWeek">
+                        </div>
+                        <div class="form-group">
+                            <label for="achievements">Key Achievements</label>
+                            <textarea id="activities" placeholder="Describe the activities completed this week..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="challenges">Challenges Faced</label>
+                            <textarea id="challenges" placeholder="Describe any challenges you encountered..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="nextWeekPlans">Next Week Plans</label>
+                            <textarea id="nextWeekPlans" placeholder="Outline your plans for next week..."></textarea>
+                        </div>
+                        <button class="btn" onclick="submitReport()">Submit Report</button>
+                    </div>
+
+                    <!-- My Reports Tab -->
+                    <div class="tab-content" id="myreports">
+                        <div id="employeeReports"></div>
+                    </div>
+                </div>
+
+                <!-- Manager Dashboard -->
+                <div id="managerDashboard" style="display: none;">
+                    <div class="tabs">
+                        <button class="tab active" onclick="switchTab('pending')">Pending Reviews</button>
+                        <button class="tab" onclick="switchTab('allreports')">All Reports</button>
+                    </div>
+
+                    <!-- Pending Reviews Tab -->
+                    <div class="tab-content active" id="pending">
+                        <div id="pendingReports"></div>
+                    </div>
+
+                    <!-- All Reports Tab -->
+                    <div class="tab-content" id="allreports">
+                        <div id="allReportsList"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js" defer></script>
+</body>
+</html>

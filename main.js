@@ -73,28 +73,28 @@
 
             // Validation
             if (!fullName || !username || !email || !password || !confirmPassword) {
-                showMessage('registerMessage', 'Please fill in all fields', 'error');
+                alert( 'Please fill in all fields', 'error');
                 return;
             }
 
             if (password.length < 6) {
-                showMessage('registerMessage', 'Password must be at least 6 characters long', 'error');
+                alert('Password must be at least 6 characters long', 'error');
                 return;
             }
 
             if (password !== confirmPassword) {
-                showMessage('registerMessage', 'Passwords do not match', 'error');
+                alert( 'Passwords do not match', 'error');
                 return;
             }
 
             if (!validateEmail(email)) {
-                showMessage('registerMessage', 'Please enter a valid email address', 'error');
+                alert( 'Please enter a valid email address', 'error');
                 return;
             }
 
             // Check if username already exists
             if (users[username]) {
-                showMessage('registerMessage', 'Username already exists. Please choose a different one.', 'error');
+                alert( 'Username already exists. Please choose a different one.', 'error');
                 return;
             }
 

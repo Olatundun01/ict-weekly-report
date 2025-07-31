@@ -101,7 +101,7 @@
             // Check if email already exists
             const existingUser = Object.values(users).find(user => user.email === email);
             if (existingUser) {
-                showMessage('registerMessage', 'Email already registered. Please use a different email.', 'error');
+                alert( 'Email already registered. Please use a different email.', 'error');
                 return;
             }
 
@@ -114,7 +114,7 @@
                 department: department
             };
 
-            showMessage('registerMessage', 'Registration successful! You can now login.', 'success');
+            alert( 'Registration successful! You can now login.', 'success');
             
             // Clear form
             document.getElementById('regFullName').value = '';
@@ -134,7 +134,7 @@
             const password = document.getElementById('loginPassword').value;
 
             if (!username || !password) {
-                showMessage('loginMessage', 'Please enter both username and password', 'error');
+                alert('loginMessage', 'Please enter both username and password', 'error');
                 return;
             }
 
@@ -170,7 +170,7 @@
                 weekEnding.setDate(today.getDate() + (5 - today.getDay()));
                 document.getElementById('reportWeek').value = weekEnding.toISOString().split('T')[0];
             } else {
-                showMessage('loginMessage', 'Invalid username or password', 'error');
+                alert('loginMessage', 'Invalid username or password', 'error');
             }
         }
 
@@ -219,7 +219,7 @@
             const suggestions = document.getElementById('suggestions').value;
 
             if (!weekEnding || !achievements || !pendingtask || !suggestions) {
-                showMessage('submitMessage', 'Please fill in all fields', 'error');
+                alert('submitMessage', 'Please fill in all fields', 'error');
                 return;
             }
 
